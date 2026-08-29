@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#1e3a5f">
+  <meta name="color-scheme" content="only light">
   <title>Nuvol Solutions — Software de gestión para empresas que operan en campo</title>
   <meta name="description" content="Nuvol Solutions diseña, construye y mantiene en producción ERP, portal de proveedores y sistemas de seguridad industrial con trabajo offline. Desarrollo a medida sobre .NET y Azure.">
   <meta property="og:title" content="Nuvol Solutions — Software de gestión para empresas que operan en campo">
@@ -16,10 +17,10 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
   <style>
     /* ---------- tokens y base ---------- */
-    :root { --navy:#1e3a5f; --navy-2:#0f2640; --navy-3:#162d4a; --accent:#2563eb; --bg:#f0f2f5; --card:#fff;
+    :root { color-scheme: only light; --navy:#1e3a5f; --navy-2:#0f2640; --navy-3:#162d4a; --accent:#2563eb; --bg:#f0f2f5; --card:#fff;
             --text:#1e293b; --text-2:#475569; --muted:#94a3b8; --border:#e5e7eb; --radius:16px; --radius-sm:10px;
             --accent-soft:#9db9f2; --on-navy:rgba(255,255,255,.72); --rule-dark:rgba(255,255,255,.14); --line-navy:rgba(30,58,95,.24);
-            --hero-grad:linear-gradient(160deg, #1e3a5f 0%, #0f2640 50%, #162d4a 100%); --nav-h:64px; --ease:cubic-bezier(.2,.7,.2,1); }
+            --hero-grad:linear-gradient(160deg, var(--navy) 0%, var(--navy-2) 50%, var(--navy-3) 100%); --nav-h:64px; --ease:cubic-bezier(.2,.7,.2,1); }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 16px); -webkit-text-size-adjust: 100%; }
     body { margin: 0; font-family: 'DM Sans', system-ui, sans-serif; font-optical-sizing: auto; color: var(--text); background: var(--bg); line-height: 1.55; -webkit-font-smoothing: antialiased; }
@@ -28,7 +29,6 @@
     h2 { font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.5rem); line-height: 1.12; }
     p { margin: 0; }
     .container { width: min(1120px, 100% - 48px); margin-inline: auto; }
-    .hero { background: var(--hero-grad); color: #fff; }
     .hero-line { width: 50px; height: 3px; background: var(--accent); border-radius: 2px; }
     .sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
     .skip { position: absolute; left: 8px; top: -60px; z-index: 40; background: #fff; color: var(--navy); padding: 10px 14px; border-radius: 6px; font-weight: 600; text-decoration: none; }
@@ -42,13 +42,13 @@
     .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 22px; border-radius: var(--radius-sm); font-weight: 600; font-size: 15px; line-height: 1.2; text-decoration: none; white-space: nowrap; transition: transform .15s var(--ease), box-shadow .15s var(--ease), background-color .15s var(--ease), border-color .15s var(--ease); }
     .btn svg { flex: none; width: 20px; height: 20px; }
     .btn:hover { transform: translateY(-1px); }
-    .btn-primary { background: linear-gradient(135deg, #1e3a5f, #162d4a); color: #fff; box-shadow: 0 8px 20px rgba(30,58,95,.35); }
+    .btn-primary { background: linear-gradient(135deg, var(--navy), var(--navy-3)); color: #fff; box-shadow: 0 8px 20px rgba(30,58,95,.35); }
     .btn-primary:hover { box-shadow: 0 12px 24px rgba(30,58,95,.4); }
-    .btn-light { background: #fff; color: var(--navy); box-shadow: 0 8px 20px rgba(0,0,0,.28); }
+    .btn-light { background: var(--card); color: var(--navy); box-shadow: 0 8px 20px rgba(0,0,0,.28); }
     .btn-light:hover { box-shadow: 0 12px 24px rgba(0,0,0,.32); }
     .btn-ghost { color: #fff; border: 1px solid rgba(255,255,255,.4); background: rgba(255,255,255,.04); }
     .btn-ghost:hover { border-color: rgba(255,255,255,.75); background: rgba(255,255,255,.08); }
-    .btn-outline { color: var(--navy); border: 1px solid var(--navy); background: #fff; }
+    .btn-outline { color: var(--navy); border: 1px solid var(--navy); background: var(--card); }
     .btn-outline:hover { background: rgba(30,58,95,.05); }
     .btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
     @media (max-width: 519px) { .btn-row .btn { width: 100%; justify-content: center; } }
@@ -91,7 +91,7 @@
     }
 
     /* ---------- hero: retícula + curvas de nivel visibles + cartela ---------- */
-    .hero { position: relative; overflow: hidden; isolation: isolate; padding: calc(var(--nav-h) + 64px) 0 72px; }
+    .hero { position: relative; overflow: hidden; isolation: isolate; padding: calc(var(--nav-h) + 64px) 0 72px; background: var(--hero-grad); color: #fff; }
     .hero-grid, .hero-rings { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
     .hero-grid { z-index: -2; }
     .hero-rings { z-index: -1; -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.4) 38%, #000 60%); mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.4) 38%, #000 60%); }
@@ -128,7 +128,7 @@
     /* ---------- secciones ---------- */
     .section { padding: 88px 0; }
     @media (max-width: 899px) { .section { padding: 64px 0; } }
-    .sec-white { background: #fff; }
+    .sec-white { background: var(--card); }
     .sec-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 32px; padding-bottom: 22px; margin-bottom: 40px; border-bottom: 1px solid var(--line-navy); }
     .sec-head h2 { margin-top: 12px; max-width: 24ch; }
 
@@ -136,7 +136,7 @@
     .cols { display: grid; grid-template-columns: 1fr; }
     .col { position: relative; padding: 24px 0 32px; border-bottom: 1px solid var(--border); }
     .col::before { content: ""; position: absolute; left: 0; top: 0; width: 18px; height: 3px; background: var(--accent); border-radius: 2px; transition: width .45s var(--ease); }
-    .col:hover::before, .col:focus-within::before { width: 50px; }
+    .col:hover::before { width: 50px; }
     .col .num { position: absolute; top: 24px; right: 0; }
     .col h3 { font-size: 1.2rem; margin: 20px 0 8px; }
     .col p { font-size: 15px; color: var(--text-2); max-width: 36ch; }
@@ -153,14 +153,15 @@
     /* producto: rejilla con separadores de 1px y fichas técnicas de filas numeradas */
     .product { display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; box-shadow: 0 1px 2px rgba(15,38,64,.06); }
     @media (min-width: 900px) { .product { grid-template-columns: repeat(3, 1fr); } }
-    .front { position: relative; background: #fff; padding: 28px 28px 32px; }
+    .front { position: relative; background: var(--card); padding: 28px 28px 32px; }
     .front .num { position: absolute; top: 26px; right: 24px; }
     .front .plate { margin-top: 22px; }
     .front h3 { font-size: 1.35rem; margin: 18px 0 6px; }
     .spec { list-style: none; margin: 22px 0 0; padding: 0; counter-reset: spec; }
     .spec li { counter-increment: spec; display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); gap: 0 8px; padding: 11px 0; border-top: 1px solid var(--border); font-size: 15px; line-height: 1.5; color: var(--text-2); }
     .spec li:last-child { border-bottom: 1px solid var(--border); }
-    .spec li::before { content: counter(spec, decimal-leading-zero); font-size: 11px; font-weight: 500; letter-spacing: .12em; color: var(--navy); font-variant-numeric: tabular-nums; padding-top: .3em; }
+    .spec li::before { content: counter(spec, decimal-leading-zero); font-size: 11px; font-weight: 500; letter-spacing: .12em; color: var(--navy); font-variant-numeric: tabular-nums; padding-top: .3em; } /* numeral visible en cualquier UA */
+    @supports (content: counter(spec) / "") { .spec li::before { content: counter(spec, decimal-leading-zero) / ""; } } /* texto alternativo vacío: el ordinal es decorativo y no se anuncia */
 
     /* proceso: banda navy con la retícula del hero; línea de tiempo vertical en móvil, horizontal en ≥900px */
     .band { position: relative; color: #fff; background: var(--hero-grad); overflow: hidden; }
@@ -184,7 +185,7 @@
     }
 
     /* tecnología: banda blanca con retícula fina y chips como etiquetas de plano */
-    .tech { position: relative; background: #fff; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .tech { position: relative; background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .tech::before { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(30,58,95,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(30,58,95,.07) 1px, transparent 1px); background-size: 40px 40px; }
     .tech .container { position: relative; }
     .tech-inner { display: grid; gap: 32px; }
@@ -196,7 +197,7 @@
     .tech-meta { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line-navy); display: flex; flex-wrap: wrap; gap: 8px 24px; }
 
     /* contacto: tarjeta partida navy / blanco */
-    .contact-card { display: grid; background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: 0 20px 60px rgba(15,38,64,.14); }
+    .contact-card { display: grid; background: var(--card); border-radius: var(--radius); overflow: hidden; box-shadow: 0 20px 60px rgba(15,38,64,.14); }
     @media (min-width: 900px) { .contact-card { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); } }
     .contact-brand { position: relative; overflow: hidden; padding: 44px 28px; background: var(--hero-grad); color: #fff; }
     .contact-brand > :not(.contact-rings) { position: relative; z-index: 1; }
@@ -303,9 +304,9 @@
           <div class="scale" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
         </div>
 
-        <aside class="sheet" aria-label="Ficha del producto">
+        <aside class="sheet" aria-labelledby="sheet-title">
           <div class="sheet-head">
-            <p class="cota">Ficha del producto</p>
+            <p class="cota" id="sheet-title">Ficha del producto</p>
             <span class="num">HOJA 01</span>
           </div>
           <dl>
@@ -381,14 +382,14 @@
             </div>
             <h3>ERP</h3>
             <p class="cota">Gestión interna</p>
-            <ol class="spec">
+            <ul class="spec" role="list">
               <li>Compras y servicios: requerimiento → pedido → cotización o licitación → orden</li>
               <li>Aprobaciones por niveles de monto, con titular y sustituto</li>
               <li>Almacén con kardex, transferencias y ajustes</li>
               <li>Activos fijos con depreciación, proyectos y bajas</li>
               <li>Tesorería: cuenta corriente, detracciones y pagos con voucher</li>
               <li>27 reportes en PDF</li>
-            </ol>
+            </ul>
           </article>
           <article class="front">
             <span class="num" aria-hidden="true">02</span>
@@ -398,13 +399,13 @@
             </div>
             <h3>Portal de proveedores</h3>
             <p class="cota">Acceso externo</p>
-            <ol class="spec">
+            <ul class="spec" role="list">
               <li>Acceso con RUC y token, sin instalar nada</li>
               <li>Licitaciones en línea con preguntas públicas y consultas privadas</li>
               <li>Facturación contra órdenes con XML UBL 2.1 validado: emisor, receptor, moneda y periodo</li>
               <li>Seguimiento de cada factura hasta el voucher de pago</li>
               <li>Cierre mensual de recepción configurable</li>
-            </ol>
+            </ul>
           </article>
           <article class="front">
             <span class="num" aria-hidden="true">03</span>
@@ -414,13 +415,13 @@
             </div>
             <h3>SIG / HSEQ</h3>
             <p class="cota">Campo · offline</p>
-            <ol class="spec">
+            <ul class="spec" role="list">
               <li>Análisis de riesgo de tarea y permiso de trabajo digitales</li>
               <li>Siete permisos complementarios: caliente, altura, espacio confinado, izaje, excavación, eléctrico y bloqueo</li>
               <li>Firmas en tablet, con o sin conexión</li>
               <li>PWA offline con sincronización automática al recuperar señal</li>
               <li>Exportación al formato oficial en Excel</li>
-            </ol>
+            </ul>
           </article>
         </div>
       </div>
