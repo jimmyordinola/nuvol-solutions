@@ -67,10 +67,14 @@ for (const [w, h] of [[360, 740], [390, 844], [1440, 900]]) {
     if (href.startsWith('#')) ok((await page.$(href)) !== null, `ancla existe: ${href}`);
   }
   if (!allowPlaceholders) {
-    const wa = hrefs.find(x => x.startsWith('https://wa.me/'));
-    ok(!!wa && /^https:\/\/wa\.me\/[1-9]\d{8,14}(\?text=[^ ]*)?$/.test(wa), `wa.me con número real: ${wa}`);
-    const mail = hrefs.find(x => x.startsWith('mailto:'));
-    ok(!!mail && /^mailto:[^@\s]+@[^@\s]+\.[a-z]{2,}(\?subject=[^ ]*)?$/i.test(mail), `mailto válido: ${mail}`);
+    const was = hrefs.filter(x => x.startsWith('https://wa.me/'));
+    ok(was.length === 2, `hay 2 enlaces wa.me a ${w}px (hay ${was.length}): ${was.join(', ')}`);
+    ok(was.every(x => x === was[0]), `todos los wa.me son iguales a ${w}px: ${was.join(', ')}`);
+    ok(was.every(wa => /^https:\/\/wa\.me\/[1-9]\d{8,14}(\?text=[^ ]*)?$/.test(wa)), `wa.me con número real a ${w}px: ${was.join(', ')}`);
+    const mails = hrefs.filter(x => x.startsWith('mailto:'));
+    ok(mails.length === 2, `hay 2 enlaces mailto a ${w}px (hay ${mails.length}): ${mails.join(', ')}`);
+    ok(mails.every(x => x === mails[0]), `todos los mailto son iguales a ${w}px: ${mails.join(', ')}`);
+    ok(mails.every(mail => /^mailto:[^@\s]+@[^@\s]+\.[a-z]{2,}(\?subject=[^ ]*)?$/i.test(mail)), `mailto válido a ${w}px: ${mails.join(', ')}`);
   }
   const ext = await page.$$eval('a[href^="http"]', as => as.map(a => [a.getAttribute('target'), a.getAttribute('rel')]));
   ok(ext.every(([t, r]) => t === '_blank' && /noopener/.test(r || '')), `externos con target=_blank rel=noopener a ${w}px`);
