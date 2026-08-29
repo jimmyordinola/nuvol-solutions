@@ -37,28 +37,29 @@
     /* ---------- foco: acento sobre claro, blanco sobre navy ---------- */
     a:focus-visible, .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
     .on-dark a:focus-visible, .on-dark .btn:focus-visible { outline-color: #fff; }
+    .skip:focus-visible { outline-color: #fff; }
 
     /* ---------- botones ---------- */
-    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 22px; border-radius: var(--radius-sm); font-weight: 600; font-size: 15px; line-height: 1.2; text-decoration: none; white-space: nowrap; transition: transform .15s var(--ease), box-shadow .15s var(--ease), background-color .15s var(--ease), border-color .15s var(--ease); }
+    .btn { display: inline-flex; align-items: center; gap: 8px; min-width: 0; padding: 13px 21px; border: 1px solid transparent; border-radius: var(--radius-sm); font-weight: 600; font-size: .9375rem; line-height: 1.2; text-align: center; text-decoration: none; transition: transform .15s var(--ease), box-shadow .15s var(--ease), background-color .15s var(--ease), border-color .15s var(--ease); }
     .btn svg { flex: none; width: 20px; height: 20px; }
     .btn:hover { transform: translateY(-1px); }
     .btn-primary { background: linear-gradient(135deg, var(--navy), var(--navy-3)); color: #fff; box-shadow: 0 8px 20px rgba(30,58,95,.35); }
     .btn-primary:hover { box-shadow: 0 12px 24px rgba(30,58,95,.4); }
     .btn-light { background: var(--card); color: var(--navy); box-shadow: 0 8px 20px rgba(0,0,0,.28); }
     .btn-light:hover { box-shadow: 0 12px 24px rgba(0,0,0,.32); }
-    .btn-ghost { color: #fff; border: 1px solid rgba(255,255,255,.4); background: rgba(255,255,255,.04); }
+    .btn-ghost { color: #fff; border-color: rgba(255,255,255,.4); background: rgba(255,255,255,.04); }
     .btn-ghost:hover { border-color: rgba(255,255,255,.75); background: rgba(255,255,255,.08); }
-    .btn-outline { color: var(--navy); border: 1px solid var(--navy); background: var(--card); }
+    .btn-outline { color: var(--navy); border-color: var(--navy); background: var(--card); }
     .btn-outline:hover { background: rgba(30,58,95,.05); }
     .btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
     @media (max-width: 519px) { .btn-row .btn { width: 100%; justify-content: center; } }
-    .note { margin-top: 12px; font-size: 12px; letter-spacing: .02em; color: var(--text-2); }
+    .note { margin-top: 12px; font-size: .75rem; letter-spacing: .02em; color: var(--text-2); }
     .on-dark .note { color: var(--on-navy); }
 
     /* ---------- metadatos de plano: cota, numeración de hoja, esquina cortada ---------- */
-    .cota { display: inline-flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; line-height: 1.4; color: var(--navy); font-variant-numeric: tabular-nums; }
+    .cota { display: inline-flex; align-items: center; gap: 10px; font-size: .75rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; line-height: 1.4; color: var(--navy); font-variant-numeric: tabular-nums; }
     .cota::before { content: ""; flex: none; width: 18px; height: 1px; background: var(--accent); }
-    .num { font-size: 12px; font-weight: 500; letter-spacing: .12em; color: var(--text-2); font-variant-numeric: tabular-nums; }
+    .num { font-size: .75rem; font-weight: 500; letter-spacing: .12em; color: var(--text-2); font-variant-numeric: tabular-nums; }
     .cut { clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px); }
     .plate { width: 44px; height: 44px; display: grid; place-items: center; color: var(--navy); border: 1px solid rgba(30,58,95,.35); background: linear-gradient(135deg, rgba(30,58,95,.35) 0 8px, #fff 8px) border-box; }
     .plate svg { width: 24px; height: 24px; }
@@ -79,7 +80,7 @@
     .brand { display: inline-flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font-weight: 600; font-size: 17px; letter-spacing: -0.01em; white-space: nowrap; }
     .brand svg { flex: none; width: 28px; height: 28px; }
     .nav-links { display: flex; gap: 4px; margin: 0; padding: 0; list-style: none; }
-    .nav-links a { display: block; color: rgba(255,255,255,.84); text-decoration: none; font-size: 14px; font-weight: 500; padding: 8px 12px; border-radius: 6px; }
+    .nav-links a { display: block; color: rgba(255,255,255,.84); text-decoration: none; font-size: .875rem; font-weight: 500; padding: 8px 12px; border-radius: 6px; }
     .nav-links a:hover { color: #fff; background: rgba(255,255,255,.08); }
     .nav-links .more { display: none; }
     @media (min-width: 900px) { .nav-links .more { display: block; } }
@@ -87,7 +88,11 @@
       .nav .container { gap: 12px; }
       .nav .brand { font-size: 15px; gap: 8px; }
       .nav .brand svg { width: 24px; height: 24px; }
-      .nav-links a { font-size: 13px; padding: 8px 8px; }
+      .nav-links a { font-size: .8125rem; padding: 8px 8px; }
+    }
+    @media (max-width: 359px) {
+      .nav .container { gap: 8px; }
+      .nav .brand span { display: none; } /* el nombre accesible lo conserva el aria-label del enlace */
     }
 
     /* ---------- hero: retícula + curvas de nivel visibles + cartela ---------- */
@@ -103,7 +108,7 @@
     .hero h1 { font-size: clamp(2.5rem, 1.5rem + 3.4vw, 4.25rem); line-height: 1.04; letter-spacing: -0.025em; margin: 18px 0 22px; max-width: 15ch; }
     .hero .lead { font-size: clamp(1.05rem, .95rem + .4vw, 1.2rem); line-height: 1.6; color: rgba(255,255,255,.78); max-width: 52ch; }
     .hero .btn-row { margin-top: 32px; }
-    .trust { display: flex; align-items: flex-start; gap: 12px; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--rule-dark); font-size: 15px; color: rgba(255,255,255,.8); max-width: 52ch; }
+    .trust { display: flex; align-items: flex-start; gap: 12px; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--rule-dark); font-size: .9375rem; color: rgba(255,255,255,.8); max-width: 52ch; }
     .trust .dot { flex: none; width: 8px; height: 8px; margin-top: 8px; border-radius: 50%; background: var(--accent-soft); box-shadow: 0 0 0 4px rgba(37,99,235,.28); }
     .scale { display: flex; width: 160px; height: 6px; margin-top: 28px; border: 1px solid rgba(255,255,255,.45); }
     .scale span { flex: 1; }
@@ -122,7 +127,7 @@
     .sheet dl { margin: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); }
     .sheet dt, .sheet dd { margin: 0; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,.1); }
     .sheet dt { font-size: 12px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-soft); padding-right: 14px; border-right: 1px solid rgba(255,255,255,.1); padding-top: 15px; }
-    .sheet dd { font-size: 15px; font-weight: 500; color: #fff; line-height: 1.45; }
+    .sheet dd { font-size: .9375rem; font-weight: 500; color: #fff; line-height: 1.45; }
     @media (max-width: 419px) { .sheet dt, .sheet dd { padding-inline: 14px; } }
 
     /* ---------- secciones ---------- */
@@ -139,7 +144,7 @@
     .col:hover::before { width: 50px; }
     .col .num { position: absolute; top: 24px; right: 0; }
     .col h3 { font-size: 1.2rem; margin: 20px 0 8px; }
-    .col p { font-size: 15px; color: var(--text-2); max-width: 36ch; }
+    .col p { font-size: .9375rem; color: var(--text-2); max-width: 36ch; }
     @media (min-width: 900px) {
       .cols { grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--border); }
       .col { padding: 24px 32px 44px; border-bottom: 0; border-left: 1px solid var(--border); }
@@ -158,9 +163,9 @@
     .front .plate { margin-top: 22px; }
     .front h3 { font-size: 1.35rem; margin: 18px 0 6px; }
     .spec { list-style: none; margin: 22px 0 0; padding: 0; counter-reset: spec; }
-    .spec li { counter-increment: spec; display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); gap: 0 8px; padding: 11px 0; border-top: 1px solid var(--border); font-size: 15px; line-height: 1.5; color: var(--text-2); }
+    .spec li { counter-increment: spec; display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); gap: 0 8px; padding: 11px 0; border-top: 1px solid var(--border); font-size: .9375rem; line-height: 1.5; color: var(--text-2); }
     .spec li:last-child { border-bottom: 1px solid var(--border); }
-    .spec li::before { content: counter(spec, decimal-leading-zero); font-size: 11px; font-weight: 500; letter-spacing: .12em; color: var(--navy); font-variant-numeric: tabular-nums; padding-top: .3em; } /* numeral visible en cualquier UA */
+    .spec li::before { content: counter(spec, decimal-leading-zero); font-size: .6875rem; font-weight: 500; letter-spacing: .12em; color: var(--navy); font-variant-numeric: tabular-nums; padding-top: .3em; } /* numeral visible en cualquier UA */
     @supports (content: counter(spec) / "") { .spec li::before { content: counter(spec, decimal-leading-zero) / ""; } } /* texto alternativo vacío: el ordinal es decorativo y no se anuncia */
 
     /* proceso: banda navy con la retícula del hero; línea de tiempo vertical en móvil, horizontal en ≥900px */
@@ -176,13 +181,14 @@
     .step:last-child::before { display: none; }
     .step .big { display: block; font-size: clamp(2.75rem, 2.2rem + 1.6vw, 3.5rem); font-weight: 300; line-height: 1; letter-spacing: -0.02em; color: var(--accent-soft); font-variant-numeric: tabular-nums; }
     .step h3 { font-size: 1.15rem; margin: 14px 0 8px; }
-    .step p { font-size: 15px; color: var(--on-navy); max-width: 34ch; }
+    .step p { font-size: .9375rem; color: var(--on-navy); max-width: 34ch; }
     @media (min-width: 900px) {
-      .timeline { grid-template-columns: repeat(4, 1fr); gap: 32px; }
+      .timeline { grid-template-columns: repeat(4, 1fr); gap: 24px; }
       .step { padding: 40px 0 0; }
-      .step::before { left: 8px; right: -32px; top: 7px; bottom: auto; width: auto; height: 1px; }
+      .step::before { left: 8px; right: -24px; top: 7px; bottom: auto; width: auto; height: 1px; }
       .step::after { top: 0; left: 0; }
     }
+    @media (min-width: 900px) and (max-width: 1023px) { .step h3 { font-size: 1.05rem; } }
 
     /* tecnología: banda blanca con retícula fina y chips como etiquetas de plano */
     .tech { position: relative; background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
@@ -193,14 +199,16 @@
     .tech h2 { margin: 12px 0 16px; }
     .tech .lead { font-size: 1.05rem; color: var(--text-2); max-width: 40ch; }
     .chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
-    .chip { display: inline-block; max-width: 100%; padding: 9px 14px; font-size: 13px; font-weight: 500; letter-spacing: .04em; color: var(--navy); border: 1px solid var(--navy); background: linear-gradient(135deg, var(--navy) 0 8px, #fff 8px) border-box; font-variant-numeric: tabular-nums; }
+    .chip { display: inline-block; max-width: 100%; padding: 9px 14px; font-size: .8125rem; font-weight: 500; letter-spacing: .04em; color: var(--navy); border: 1px solid var(--navy); background: linear-gradient(135deg, var(--navy) 0 8px, #fff 8px) border-box; font-variant-numeric: tabular-nums; }
     .tech-meta { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line-navy); display: flex; flex-wrap: wrap; gap: 8px 24px; }
 
     /* contacto: tarjeta partida navy / blanco */
-    .contact-card { display: grid; background: var(--card); border-radius: var(--radius); overflow: hidden; box-shadow: 0 20px 60px rgba(15,38,64,.14); }
+    .contact-card { display: grid; grid-template-columns: minmax(0, 1fr); background: var(--card); border-radius: var(--radius); overflow: hidden; box-shadow: 0 20px 60px rgba(15,38,64,.14); }
+    .contact-card > * { min-width: 0; }
     @media (min-width: 900px) { .contact-card { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); } }
     .contact-brand { position: relative; overflow: hidden; padding: 44px 28px; background: var(--hero-grad); color: #fff; }
     .contact-brand > :not(.contact-rings) { position: relative; z-index: 1; }
+    .contact-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px; }
     .contact-rings { position: absolute; right: -70px; bottom: -90px; width: 340px; height: 340px; pointer-events: none; }
     .contact-rings use { fill: none; stroke: var(--accent-soft); stroke-opacity: .34; stroke-width: 1; }
     .contact-brand h2 { margin: 12px 0 14px; max-width: 18ch; }
@@ -209,13 +217,17 @@
     .contact-panel { padding: 36px 28px; display: flex; flex-direction: column; justify-content: center; }
     .contact-panel .btn-row { flex-direction: column; align-items: stretch; }
     .contact-panel .btn { justify-content: center; }
+    @media (max-width: 399px) {
+      .contact-brand { padding: 40px 24px; }
+      .contact-panel { padding: 32px 24px; }
+    }
     @media (min-width: 900px) {
       .contact-brand { padding: 56px 52px; }
       .contact-panel { padding: 48px 44px; }
     }
 
     /* pie */
-    .footer { background: var(--navy-2); color: var(--on-navy); padding: 36px 0; font-size: 14px; }
+    .footer { background: var(--navy-2); color: var(--on-navy); padding: 36px 0; font-size: .875rem; }
     .footer .container { display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center; justify-content: space-between; }
     .footer nav { display: flex; flex-wrap: wrap; gap: 4px 20px; }
     .footer a { color: rgba(255,255,255,.84); text-decoration: none; }
@@ -227,6 +239,14 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { transition: none !important; animation: none !important; }
+    }
+
+    /* ---------- impresion: conserva las superficies oscuras y quita lo decorativo ---------- */
+    @media print {
+      .nav, .skip, .hero-grid, .hero-rings, .contact-rings, .scale, .band::before, .tech::before { display: none !important; }
+      .hero { padding-top: 32px; }
+      .hero, .band, .contact-brand, .footer, .btn-primary { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .col, .front, .step, .product, .contact-card { break-inside: avoid; }
     }
   </style>
 </head>
@@ -250,7 +270,7 @@
         <span>Nuvol Solutions</span>
       </a>
       <nav aria-label="Principal">
-        <ul class="nav-links">
+        <ul class="nav-links" role="list">
           <li class="more"><a href="#servicios">Servicios</a></li>
           <li><a href="#producto">Producto</a></li>
           <li class="more"><a href="#proceso">Proceso</a></li>
@@ -307,7 +327,7 @@
         <aside class="sheet" aria-labelledby="sheet-title">
           <div class="sheet-head">
             <p class="cota" id="sheet-title">Ficha del producto</p>
-            <span class="num">HOJA 01</span>
+            <span class="num" aria-hidden="true">HOJA 01 / 06</span>
           </div>
           <dl>
             <dt>Producto</dt><dd>KNET</dd>
@@ -318,7 +338,7 @@
           </dl>
           <div class="sheet-foot">
             <div class="hero-line" aria-hidden="true"></div>
-            <span class="num">NUVOL SOLUTIONS</span>
+            <span class="num" aria-hidden="true">NUVOL SOLUTIONS</span>
           </div>
         </aside>
       </div>
@@ -332,7 +352,7 @@
             <p class="cota">02 · Servicios</p>
             <h2>Qué hacemos</h2>
           </div>
-          <span class="num">HOJA 02 / 06</span>
+          <span class="num" aria-hidden="true">HOJA 02 / 06</span>
         </div>
         <div class="cols">
           <article class="col">
@@ -371,7 +391,7 @@
             <p class="cota">03 · Producto</p>
             <h2>KNET: un sistema, tres frentes</h2>
           </div>
-          <span class="num">HOJA 03 / 06</span>
+          <span class="num" aria-hidden="true">HOJA 03 / 06</span>
         </div>
         <div class="product">
           <article class="front">
@@ -435,9 +455,9 @@
             <p class="cota">04 · Proceso</p>
             <h2>Cómo trabajamos</h2>
           </div>
-          <span class="num">HOJA 04 / 06</span>
+          <span class="num" aria-hidden="true">HOJA 04 / 06</span>
         </div>
-        <ol class="timeline">
+        <ol class="timeline" role="list">
           <li class="step">
             <span class="big" aria-hidden="true">01</span>
             <h3>Entender el proceso</h3>
@@ -451,7 +471,7 @@
           <li class="step">
             <span class="big" aria-hidden="true">03</span>
             <h3>Construir con pruebas</h3>
-            <p>Pruebas unitarias y de extremo a extremo sobre una copia de la base real.</p>
+            <p>Pruebas unitarias, y de extremo a extremo sobre una copia de la base real.</p>
           </li>
           <li class="step">
             <span class="big" aria-hidden="true">04</span>
@@ -472,7 +492,7 @@
             <p class="lead">Un ERP en producción con desarrollo continuo desde 2019, para una empresa de servicios petroleros en Perú.</p>
           </div>
           <div>
-            <ul class="chips" aria-label="Tecnologías">
+            <ul class="chips" role="list" aria-label="Tecnologías">
               <li class="chip cut">.NET</li>
               <li class="chip cut">SQL Server</li>
               <li class="chip cut">Azure App Service</li>
@@ -483,8 +503,8 @@
               <li class="chip cut">Playwright</li>
             </ul>
             <div class="tech-meta">
-              <span class="num">HOJA 05 / 06</span>
-              <span class="num">ESPECIFICACIÓN TÉCNICA</span>
+              <span class="num" aria-hidden="true">HOJA 05 / 06</span>
+              <span class="num" aria-hidden="true">ESPECIFICACIÓN TÉCNICA</span>
             </div>
           </div>
         </div>
@@ -502,7 +522,10 @@
               <use href="#ring" transform="rotate(6) scale(1.4)"/>
               <use href="#ring" transform="rotate(12) scale(1.8)"/>
             </svg>
-            <p class="cota">06 · Contacto</p>
+            <div class="contact-top">
+              <p class="cota">06 · Contacto</p>
+              <span class="num" aria-hidden="true">HOJA 06 / 06</span>
+            </div>
             <h2>Cuéntanos qué necesita tu operación</h2>
             <p class="lead">Respondemos por WhatsApp o correo. Sin formularios.</p>
             <div class="hero-line" aria-hidden="true"></div>
