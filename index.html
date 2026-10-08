@@ -14,368 +14,369 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%231e3a5f'/%3E%3Cpath%20d='M10%2021.5h11.5a3.5%203.5%200%200%200%20.5-6.96A6%206%200%200%200%2010.6%2012.8%204.4%204.4%200%200%200%2010%2021.5z'%20fill='none'%20stroke='%23fff'%20stroke-width='1.8'%20stroke-linejoin='round'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* ---------- tokens y base ---------- */
-    :root { color-scheme: only light; --navy:#1e3a5f; --navy-2:#0f2640; --navy-3:#162d4a; --accent:#2563eb; --bg:#f0f2f5; --card:#fff;
-            --text:#1e293b; --text-2:#475569; --muted:#94a3b8; --border:#e5e7eb; --radius:16px; --radius-sm:10px;
-            --accent-soft:#9db9f2; --on-navy:rgba(255,255,255,.72); --rule-dark:rgba(255,255,255,.14); --line-navy:rgba(30,58,95,.24);
-            --hero-grad:linear-gradient(160deg, var(--navy) 0%, var(--navy-2) 50%, var(--navy-3) 100%); --nav-h:64px; --ease:cubic-bezier(.2,.7,.2,1); }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 16px); -webkit-text-size-adjust: 100%; }
-    body { margin: 0; font-family: 'DM Sans', system-ui, sans-serif; font-optical-sizing: auto; color: var(--text); background: var(--bg); line-height: 1.55; -webkit-font-smoothing: antialiased; }
-    h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; margin: 0; }
-    h1, h2 { text-wrap: balance; }
-    h2 { font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.5rem); line-height: 1.12; }
-    p { margin: 0; }
-    .container { width: min(1120px, 100% - 48px); margin-inline: auto; }
-    .hero-line { width: 50px; height: 3px; background: var(--accent); border-radius: 2px; }
-    .sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
-    .skip { position: absolute; left: 8px; top: -60px; z-index: 40; background: #fff; color: var(--navy); padding: 10px 14px; border-radius: 6px; font-weight: 600; text-decoration: none; }
-    .skip:focus { top: 8px; }
-
-    /* ---------- foco: acento sobre claro, blanco sobre navy ---------- */
-    a:focus-visible, .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
-    .on-dark a:focus-visible, .on-dark .btn:focus-visible { outline-color: #fff; }
-    .skip:focus-visible { outline-color: #fff; }
-
-    /* ---------- botones ---------- */
-    .btn { display: inline-flex; align-items: center; gap: 8px; min-width: 0; padding: 13px 21px; border: 1px solid transparent; border-radius: var(--radius-sm); font-weight: 600; font-size: .9375rem; line-height: 1.2; text-align: center; text-decoration: none; transition: transform .15s var(--ease), box-shadow .15s var(--ease), background-color .15s var(--ease), border-color .15s var(--ease); }
-    .btn svg { flex: none; width: 20px; height: 20px; }
-    .btn:hover { transform: translateY(-1px); }
-    .btn-primary { background: linear-gradient(135deg, var(--navy), var(--navy-3)); color: #fff; box-shadow: 0 8px 20px rgba(30,58,95,.35); }
-    .btn-primary:hover { box-shadow: 0 12px 24px rgba(30,58,95,.4); }
-    .btn-light { background: var(--card); color: var(--navy); box-shadow: 0 8px 20px rgba(0,0,0,.28); }
-    .btn-light:hover { box-shadow: 0 12px 24px rgba(0,0,0,.32); }
-    .btn-ghost { color: #fff; border-color: rgba(255,255,255,.4); background: rgba(255,255,255,.04); }
-    .btn-ghost:hover { border-color: rgba(255,255,255,.75); background: rgba(255,255,255,.08); }
-    .btn-outline { color: var(--navy); border-color: var(--navy); background: var(--card); }
-    .btn-outline:hover { background: rgba(30,58,95,.05); }
-    .btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
-    @media (max-width: 519px) { .btn-row .btn { width: 100%; justify-content: center; } }
-    .note { margin-top: 12px; font-size: .75rem; letter-spacing: .02em; color: var(--text-2); }
-    .on-dark .note { color: var(--on-navy); }
-
-    /* ---------- metadatos de plano: cota, numeración de hoja, esquina cortada ---------- */
-    .cota { display: inline-flex; align-items: center; gap: 10px; font-size: .75rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; line-height: 1.4; color: var(--navy); font-variant-numeric: tabular-nums; }
-    .cota::before { content: ""; flex: none; width: 18px; height: 1px; background: var(--accent); }
-    .num { font-size: .75rem; font-weight: 500; letter-spacing: .12em; color: var(--text-2); font-variant-numeric: tabular-nums; }
-    .cut { clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px); }
-    .plate { width: 44px; height: 44px; display: grid; place-items: center; color: var(--navy); border: 1px solid rgba(30,58,95,.35); background: linear-gradient(135deg, rgba(30,58,95,.35) 0 8px, #fff 8px) border-box; }
-    .plate svg { width: 24px; height: 24px; }
-    .on-dark .cota { color: var(--accent-soft); }
-    .on-dark .cota::before { background: var(--accent-soft); }
-    .on-dark .num { color: var(--on-navy); }
-
-    /* ---------- navegación: transparente sobre el hero, navy al desplazarse (sin JS) ---------- */
-    .nav { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); z-index: 30; color: #fff; background: rgba(15,38,64,.85); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,.08); }
-    @supports (animation-timeline: scroll()) {
-      .nav { animation: nav-solid linear both; animation-timeline: scroll(root); animation-range: 0 160px; }
+    /* ============ tokens ============ */
+    :root {
+      color-scheme: only light;
+      --navy:#1e3a5f; --navy-2:#0f2640; --navy-3:#162d4a;
+      --blue:#2563eb; --blue-700:#1d4ed8; --blue-50:#eff6ff;
+      --cyan:#06b6d4; --amber:#f59e0b; --violet:#7c3aed; --green:#10b981;
+      --ink:#111827; --body:#4b5563; --muted:#6b7280; --soft:#9ca3af;
+      --line:#e5e7eb; --line-2:#eef2f7; --card:#fff; --wash:#f9fafb;
+      --sky:linear-gradient(135deg,#ecfeff 0%,#eff6ff 100%);
+      --r-sm:10px; --r:16px; --r-lg:22px;
+      --sh-sm:0 1px 2px rgba(16,24,40,.05);
+      --sh:0 1px 2px rgba(16,24,40,.04), 0 12px 32px -14px rgba(16,24,40,.18);
+      --sh-lg:0 24px 60px -20px rgba(16,24,40,.28);
+      --nav-h:72px;
+      --ease:cubic-bezier(.22,.8,.26,1);
     }
-    @keyframes nav-solid {
-      from { background: rgba(15,38,64,0); border-bottom-color: rgba(255,255,255,0); -webkit-backdrop-filter: blur(0); backdrop-filter: blur(0); }
-      to   { background: rgba(15,38,64,.85); border-bottom-color: rgba(255,255,255,.08); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:calc(var(--nav-h) + 20px); -webkit-text-size-adjust:100%; }
+    body {
+      margin:0; background:var(--card); color:var(--body);
+      font-family:'Inter', system-ui, -apple-system, sans-serif;
+      font-size:1.0625rem; line-height:1.7; -webkit-font-smoothing:antialiased;
     }
-    .nav .container { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-    .brand { display: inline-flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font-weight: 600; font-size: 17px; letter-spacing: -0.01em; white-space: nowrap; }
-    .brand svg { flex: none; width: 28px; height: 28px; }
-    .nav-links { display: flex; gap: 4px; margin: 0; padding: 0; list-style: none; }
-    .nav-links a { display: block; color: rgba(255,255,255,.84); text-decoration: none; font-size: .875rem; font-weight: 500; padding: 8px 12px; border-radius: 6px; }
-    .nav-links a:hover { color: #fff; background: rgba(255,255,255,.08); }
-    .nav-links .more { display: none; }
-    @media (min-width: 900px) { .nav-links .more { display: block; } }
-    @media (max-width: 479px) {
-      .nav .container { gap: 12px; }
-      .nav .brand { font-size: 15px; gap: 8px; }
-      .nav .brand svg { width: 24px; height: 24px; }
-      .nav-links a { font-size: .8125rem; padding: 8px 8px; }
+    h1,h2,h3 { margin:0; color:var(--ink); font-weight:800; letter-spacing:-.03em; line-height:1.1; }
+    h1 { font-size:clamp(2.3rem,1.45rem + 3.5vw,3.9rem); letter-spacing:-.04em; line-height:1.03; }
+    h2 { font-size:clamp(1.8rem,1.2rem + 2.4vw,2.85rem); }
+    h3 { font-size:1.1875rem; letter-spacing:-.02em; line-height:1.3; }
+    h1,h2 { text-wrap:balance; }
+    p { margin:0; }
+    ul,ol { margin:0; padding:0; list-style:none; }
+    .container { width:min(1200px, 100% - 48px); margin-inline:auto; }
+    .lead { font-size:1.125rem; color:var(--body); }
+    .eyebrow { display:block; font-size:.8125rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--blue); }
+    .center { text-align:center; }
+    .center .lead { max-width:62ch; margin-inline:auto; }
+    .sec { padding:clamp(70px,8.5vw,116px) 0; }
+    .sec-wash { background:var(--wash); }
+    .sec-sky { background:var(--sky); }
+    .sec-head { margin-bottom:clamp(38px,5vw,62px); }
+    .sec-head .eyebrow { margin-bottom:14px; }
+    .mt-14 { margin-top:14px; }
+    .mt-18 { margin-top:18px; }
+    a:focus-visible, .btn:focus-visible { outline:3px solid var(--blue); outline-offset:3px; border-radius:6px; }
+    .on-dark a:focus-visible, .on-dark .btn:focus-visible { outline-color:#fff; }
+    .skip { position:absolute; left:12px; top:-64px; z-index:60; background:#fff; color:var(--navy); padding:12px 18px; border-radius:var(--r-sm); font-weight:700; text-decoration:none; box-shadow:var(--sh); }
+    .skip:focus { top:12px; }
+    .skip:focus-visible { outline-color:var(--blue); }
+    .sprite { position:absolute; width:0; height:0; overflow:hidden; }
+
+    /* ============ botones ============ */
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center; gap:10px; min-width:0;
+      padding:14px 24px; border:1.5px solid transparent; border-radius:var(--r-sm);
+      font-size:.9688rem; font-weight:600; line-height:1.2; text-decoration:none;
+      transition:transform .18s var(--ease), box-shadow .18s var(--ease), background-color .18s var(--ease), border-color .18s var(--ease);
     }
-    @media (max-width: 359px) {
-      .nav .container { gap: 8px; }
-      .nav .brand span { display: none; } /* el nombre accesible lo conserva el aria-label del enlace */
-    }
+    .btn svg { flex:none; width:19px; height:19px; }
+    .btn:hover { transform:translateY(-2px); }
+    .btn-primary { background:linear-gradient(135deg,var(--blue),var(--blue-700)); color:#fff; box-shadow:0 10px 24px -6px rgba(37,99,235,.45); }
+    .btn-primary:hover { box-shadow:0 16px 32px -8px rgba(37,99,235,.55); }
+    .btn-ghost { background:#fff; color:var(--navy); border-color:var(--line); box-shadow:var(--sh-sm); }
+    .btn-ghost:hover { border-color:#c7d2e4; }
+    .btn-white { background:#fff; color:var(--navy); box-shadow:0 12px 26px -10px rgba(0,0,0,.5); }
+    .btn-outline-white { color:#fff; border-color:rgba(255,255,255,.45); }
+    .btn-outline-white:hover { border-color:#fff; background:rgba(255,255,255,.08); }
+    .btn-sm { padding:11px 19px; font-size:.9063rem; }
+    .btn-row { display:flex; flex-wrap:wrap; gap:14px; }
+    @media (max-width:519px) { .btn-row .btn { width:100%; } }
+    .note { font-size:.875rem; color:var(--muted); }
+    .on-dark .note { color:rgba(255,255,255,.7); }
 
-    /* ---------- hero: retícula + curvas de nivel visibles + cartela ---------- */
-    .hero { position: relative; overflow: hidden; isolation: isolate; padding: calc(var(--nav-h) + 64px) 0 72px; background: var(--hero-grad); color: #fff; }
-    .hero-grid, .hero-rings { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-    .hero-grid { z-index: -2; }
-    .hero-rings { z-index: -1; -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.4) 38%, #000 60%); mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.4) 38%, #000 60%); }
-    .hero-rings use { fill: none; stroke: var(--accent-soft); stroke-opacity: .34; stroke-width: 1; }
-    .hero-rings .mark { fill: none; stroke: var(--accent-soft); stroke-opacity: .75; stroke-width: 1; }
-    .hero-inner { position: relative; display: grid; gap: 48px; align-items: center; }
-    @media (min-width: 900px) { .hero-inner { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 64px; } }
-    @media (max-width: 399px) { .hero-copy .cota { font-size: 11px; letter-spacing: .1em; } }
-    .hero h1 { font-size: clamp(2.5rem, 1.5rem + 3.4vw, 4.25rem); line-height: 1.04; letter-spacing: -0.025em; margin: 18px 0 22px; max-width: 15ch; }
-    .hero .lead { font-size: clamp(1.05rem, .95rem + .4vw, 1.2rem); line-height: 1.6; color: rgba(255,255,255,.78); max-width: 52ch; }
-    .hero .btn-row { margin-top: 32px; }
-    .trust { display: flex; align-items: flex-start; gap: 12px; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--rule-dark); font-size: .9375rem; color: rgba(255,255,255,.8); max-width: 52ch; }
-    .trust .dot { flex: none; width: 8px; height: 8px; margin-top: 8px; border-radius: 50%; background: var(--accent-soft); box-shadow: 0 0 0 4px rgba(37,99,235,.28); }
-    .scale { display: flex; width: 160px; height: 6px; margin-top: 28px; border: 1px solid rgba(255,255,255,.45); }
-    .scale span { flex: 1; }
-    .scale span:nth-child(odd) { background: rgba(255,255,255,.45); }
+    /* ============ marca y navegación ============ */
+    .brand { display:inline-flex; align-items:center; gap:11px; text-decoration:none; font-weight:800; font-size:1.0625rem; letter-spacing:-.02em; color:var(--ink); white-space:nowrap; }
+    .brand-mark { flex:none; width:40px; height:40px; border-radius:12px; display:grid; place-items:center; background:linear-gradient(135deg,var(--navy),var(--blue)); box-shadow:0 8px 18px -8px rgba(30,58,95,.7); }
+    .brand-mark svg { width:23px; height:23px; color:#fff; }
+    .on-dark .brand { color:#fff; }
+    .nav { position:fixed; inset:0 0 auto 0; z-index:50; height:var(--nav-h); background:rgba(255,255,255,.9); -webkit-backdrop-filter:saturate(180%) blur(12px); backdrop-filter:saturate(180%) blur(12px); border-bottom:1px solid var(--line-2); }
+    .nav .container { height:100%; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .nav-links { display:none; align-items:center; gap:4px; }
+    .nav-links a { color:var(--body); text-decoration:none; font-size:.9375rem; font-weight:500; padding:9px 13px; border-radius:8px; }
+    .nav-links a:hover { color:var(--ink); background:#f3f4f6; }
+    @media (min-width:920px) { .nav-links { display:flex; } }
+    .nav .btn { display:none; }
+    @media (min-width:600px) { .nav .btn { display:inline-flex; } }
+    @media (max-width:359px) { .nav .brand span:last-child { display:none; } }
 
-    /* entrada corta: solo titular, cota, párrafo y cartela; CTA y línea de confianza quedan estáticos */
-    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-    .hero-copy > .cota, .hero h1, .hero .lead, .sheet { animation: rise .45s var(--ease) both; }
-    .hero h1 { animation-delay: .06s; }
-    .hero .lead { animation-delay: .12s; }
+    /* ============ hero ============ */
+    .hero { position:relative; overflow:hidden; isolation:isolate; padding:calc(var(--nav-h) + clamp(52px,6.5vw,88px)) 0 clamp(70px,8.5vw,110px); background:linear-gradient(180deg,#f0f9ff 0%,#eff6ff 44%,#fff 100%); }
+    .blob { position:absolute; z-index:-1; pointer-events:none; }
+    .blob-1 { top:-90px; left:-120px; width:330px; height:330px; border-radius:72px; background:linear-gradient(135deg,#a5f3fc,#bae6fd); opacity:.45; transform:rotate(18deg); }
+    .blob-2 { top:60px; right:-80px; width:260px; height:260px; border-radius:50%; background:#ede9fe; opacity:.7; }
+    .blob-3 { bottom:-130px; left:3%; width:240px; height:240px; border-radius:56px; background:linear-gradient(135deg,#bae6fd,#e0f2fe); opacity:.55; transform:rotate(-12deg); }
+    .hero-grid { display:grid; gap:clamp(56px,7vw,76px); align-items:center; }
+    @media (min-width:1000px) { .hero-grid { grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:56px; } }
+    .hero-copy > * + * { margin-top:20px; }
+    .hero-copy .lead { max-width:38ch; font-size:1.1875rem; }
+    .hero-copy .btn-row { margin-top:30px; }
+    .trust { display:flex; align-items:flex-start; gap:11px; margin-top:26px; font-size:.9375rem; color:var(--muted); max-width:46ch; }
+    .trust .dot { flex:none; width:22px; height:22px; margin-top:3px; border-radius:50%; background:#dcfce7; display:grid; place-items:center; }
+    .trust .dot svg { width:13px; height:13px; color:#15803d; }
+    .rise { animation:rise .55s var(--ease) both; }
+    .rise-1 { animation-delay:.03s; } .rise-2 { animation-delay:.09s; } .rise-3 { animation-delay:.15s; }
+    @keyframes rise { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
 
-    /* cartela (título de plano) */
-    .sheet { animation-delay: .1s; border: 1px solid rgba(255,255,255,.16); border-radius: var(--radius-sm); background: rgba(15,38,64,.62); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
-    .sheet-head, .sheet-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 20px; }
-    .sheet-head { border-bottom: 1px solid var(--rule-dark); }
-    .sheet dl { margin: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); }
-    .sheet dt, .sheet dd { margin: 0; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,.1); }
-    .sheet dt { font-size: 12px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-soft); padding-right: 14px; border-right: 1px solid rgba(255,255,255,.1); padding-top: 15px; }
-    .sheet dd { font-size: .9375rem; font-weight: 500; color: #fff; line-height: 1.45; }
-    @media (max-width: 419px) { .sheet dt, .sheet dd { padding-inline: 14px; } }
-
-    /* ---------- secciones ---------- */
-    .section { padding: 88px 0; }
-    @media (max-width: 899px) { .section { padding: 64px 0; } }
-    .sec-white { background: var(--card); }
-    .sec-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 32px; padding-bottom: 22px; margin-bottom: 40px; border-bottom: 1px solid var(--line-navy); }
-    .sec-head h2 { margin-top: 12px; max-width: 24ch; }
-
-    /* servicios: columnas con divisores de 1px y barra de acento que crece (sin tarjetas) */
-    .cols { display: grid; grid-template-columns: 1fr; }
-    .col { position: relative; padding: 24px 0 32px; border-bottom: 1px solid var(--border); }
-    .col::before { content: ""; position: absolute; left: 0; top: 0; width: 18px; height: 3px; background: var(--accent); border-radius: 2px; transition: width .45s var(--ease); }
-    .col:hover::before { width: 50px; }
-    .col .num { position: absolute; top: 24px; right: 0; }
-    .col h3 { font-size: 1.2rem; margin: 20px 0 8px; }
-    .col p { font-size: .9375rem; color: var(--text-2); max-width: 36ch; }
-    @media (min-width: 900px) {
-      .cols { grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--border); }
-      .col { padding: 24px 32px 44px; border-bottom: 0; border-left: 1px solid var(--border); }
-      .col:first-child { padding-left: 0; border-left: 0; }
-      .col:last-child { padding-right: 0; }
-      .col + .col::before { left: 32px; }
-      .col .num { right: 32px; }
-      .col:last-child .num { right: 0; }
+    /* tarjeta de producto + badges flotantes */
+    .showcase { position:relative; justify-self:center; width:100%; max-width:470px; }
+    .panel { position:relative; z-index:1; background:var(--card); border-radius:var(--r-lg); box-shadow:var(--sh-lg); overflow:hidden; }
+    .panel-top { height:10px; background:linear-gradient(90deg,var(--navy),var(--blue) 55%,var(--cyan)); }
+    .spec { padding:22px 22px 52px; }
+    .spec > div { display:grid; grid-template-columns:92px 1fr; gap:14px; align-items:baseline; padding:14px 0; border-bottom:1px solid var(--line-2); }
+    .spec > div:last-child { border-bottom:0; padding-bottom:4px; }
+    .spec dt { font-size:.75rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--soft); }
+    .spec dd { margin:0; font-size:.9375rem; font-weight:600; color:var(--ink); line-height:1.5; }
+    .badge { display:flex; align-items:center; gap:10px; padding:11px 15px; border-radius:14px; color:#fff; box-shadow:0 16px 34px -14px rgba(16,24,40,.75); }
+    .badge i { flex:none; width:30px; height:30px; border-radius:9px; background:rgba(255,255,255,.22); display:grid; place-items:center; }
+    .badge i svg { width:16px; height:16px; }
+    .badge b { display:block; font-size:.8438rem; font-weight:700; line-height:1.25; letter-spacing:-.01em; }
+    .badge em { display:block; font-style:normal; font-size:.75rem; opacity:.9; line-height:1.3; }
+    .badge-1 { background:linear-gradient(135deg,#22d3ee,#0891b2); }
+    .badge-2 { background:linear-gradient(135deg,#fbbf24,#ea8a0b); }
+    .badge-3 { background:linear-gradient(135deg,#8b5cf6,#6d28d9); }
+    .badge-wrap { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px; }
+    @media (min-width:620px) {
+      .badge-wrap { display:block; margin:0; }
+      .badge { position:absolute; z-index:2; }
+      .badge-1 { top:-24px; left:-20px; }
+      .badge-2 { top:-24px; right:-18px; }
+      .badge-3 { bottom:-22px; left:9%; }
     }
 
-    /* producto: rejilla con separadores de 1px y fichas técnicas de filas numeradas */
-    .product { display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; box-shadow: 0 1px 2px rgba(15,38,64,.06); }
-    @media (min-width: 900px) { .product { grid-template-columns: repeat(3, 1fr); } }
-    .front { position: relative; background: var(--card); padding: 28px 28px 32px; }
-    .front .num { position: absolute; top: 26px; right: 24px; }
-    .front .plate { margin-top: 22px; }
-    .front h3 { font-size: 1.35rem; margin: 18px 0 6px; }
-    .spec { list-style: none; margin: 22px 0 0; padding: 0; counter-reset: spec; }
-    .spec li { counter-increment: spec; display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); gap: 0 8px; padding: 11px 0; border-top: 1px solid var(--border); font-size: .9375rem; line-height: 1.5; color: var(--text-2); }
-    .spec li:last-child { border-bottom: 1px solid var(--border); }
-    .spec li::before { content: counter(spec, decimal-leading-zero); font-size: .6875rem; font-weight: 500; letter-spacing: .12em; color: var(--navy); font-variant-numeric: tabular-nums; padding-top: .3em; } /* numeral visible en cualquier UA */
-    @supports (content: counter(spec) / "") { .spec li::before { content: counter(spec, decimal-leading-zero) / ""; } } /* texto alternativo vacío: el ordinal es decorativo y no se anuncia */
+    /* ============ tarjetas ============ */
+    .grid-3 { display:grid; gap:24px; grid-template-columns:1fr; }
+    @media (min-width:880px) { .grid-3 { grid-template-columns:repeat(3,1fr); } }
+    .card { background:var(--card); border:1px solid var(--line-2); border-radius:var(--r-lg); padding:34px 30px; box-shadow:var(--sh); transition:transform .22s var(--ease), box-shadow .22s var(--ease); }
+    .card:hover { transform:translateY(-4px); box-shadow:0 26px 54px -22px rgba(16,24,40,.3); }
+    .card h3 { margin-bottom:12px; }
+    .card p { font-size:1rem; }
+    .ico { width:60px; height:60px; border-radius:50%; display:grid; place-items:center; margin-bottom:22px; }
+    .ico svg { width:27px; height:27px; color:#fff; }
+    .ico-amber { background:linear-gradient(135deg,#fbbf24,#ea8a0b); box-shadow:0 12px 26px -12px rgba(234,138,11,.9); }
+    .ico-violet { background:linear-gradient(135deg,#a78bfa,#6d28d9); box-shadow:0 12px 26px -12px rgba(109,40,217,.9); }
+    .ico-cyan { background:linear-gradient(135deg,#22d3ee,#0891b2); box-shadow:0 12px 26px -12px rgba(8,145,178,.9); }
+    .ico-blue { background:linear-gradient(135deg,#60a5fa,#1d4ed8); box-shadow:0 12px 26px -12px rgba(29,78,216,.9); }
+    .ico-green { background:linear-gradient(135deg,#34d399,#059669); box-shadow:0 12px 26px -12px rgba(5,150,105,.9); }
 
-    /* proceso: banda navy con la retícula del hero; línea de tiempo vertical en móvil, horizontal en ≥900px */
-    .band { position: relative; color: #fff; background: var(--hero-grad); overflow: hidden; }
-    .band::before { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px); background-size: 40px 40px; }
-    .band .container { position: relative; }
-    .band .sec-head { border-bottom-color: var(--rule-dark); }
-    .timeline { list-style: none; margin: 0; padding: 0; display: grid; }
-    .step { position: relative; padding: 0 0 40px 40px; }
-    .step::before { content: ""; position: absolute; left: 7px; top: 10px; bottom: -6px; width: 1px; background: rgba(255,255,255,.22); }
-    .step::after { content: ""; position: absolute; left: 0; top: 6px; width: 15px; height: 15px; border-radius: 50%; border: 2px solid var(--accent-soft); background: var(--navy-2); }
-    .step:last-child { padding-bottom: 0; }
-    .step:last-child::before { display: none; }
-    .step .big { display: block; font-size: clamp(2.75rem, 2.2rem + 1.6vw, 3.5rem); font-weight: 300; line-height: 1; letter-spacing: -0.02em; color: var(--accent-soft); font-variant-numeric: tabular-nums; }
-    .step h3 { font-size: 1.15rem; margin: 14px 0 8px; }
-    .step p { font-size: .9375rem; color: var(--on-navy); max-width: 34ch; }
-    @media (min-width: 900px) {
-      .timeline { grid-template-columns: repeat(4, 1fr); gap: 24px; }
-      .step { padding: 40px 0 0; }
-      .step::before { left: 8px; right: -24px; top: 7px; bottom: auto; width: auto; height: 1px; }
-      .step::after { top: 0; left: 0; }
+    /* ============ producto ============ */
+    .tag { align-self:flex-start; padding:5px 12px; border-radius:999px; font-size:.75rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
+    .tag-blue { background:var(--blue-50); color:#1d4ed8; }
+    .tag-cyan { background:#ecfeff; color:#0e7490; }
+    .tag-green { background:#ecfdf5; color:#047857; }
+    .front { display:flex; flex-direction:column; }
+    .front .ico { margin-bottom:20px; }
+    .front h3 { font-size:1.375rem; margin:12px 0 18px; }
+    .checks { display:grid; gap:13px; }
+    .checks li { display:grid; grid-template-columns:22px 1fr; gap:12px; align-items:start; font-size:.9688rem; line-height:1.55; }
+    .checks .tick { margin-top:3px; width:22px; height:22px; border-radius:50%; background:linear-gradient(135deg,#34d399,#059669); display:grid; place-items:center; }
+    .checks .tick svg { width:13px; height:13px; color:#fff; }
+
+    /* ============ proceso ============ */
+    .steps { display:grid; gap:38px; grid-template-columns:1fr; }
+    @media (min-width:900px) { .steps { grid-template-columns:repeat(4,1fr); gap:28px; } }
+    .step { position:relative; }
+    .step::before { content:""; position:absolute; background:linear-gradient(90deg,#bfdbfe,#e0ecfd); }
+    .step-n { position:relative; z-index:1; display:grid; place-items:center; width:56px; height:56px; border-radius:50%; background:linear-gradient(135deg,var(--blue),var(--navy)); color:#fff; font-size:1.0625rem; font-weight:800; letter-spacing:-.02em; box-shadow:0 12px 26px -12px rgba(37,99,235,.95); }
+    .step h3 { margin:20px 0 10px; }
+    .step p { font-size:1rem; }
+    @media (min-width:900px) {
+      .step::before { top:27px; left:56px; right:-28px; height:2px; }
+      .step:last-child::before { display:none; }
     }
-    @media (min-width: 900px) and (max-width: 1023px) { .step h3 { font-size: 1.05rem; } }
-
-    /* tecnología: banda blanca con retícula fina y chips como etiquetas de plano */
-    .tech { position: relative; background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .tech::before { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(30,58,95,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(30,58,95,.07) 1px, transparent 1px); background-size: 40px 40px; }
-    .tech .container { position: relative; }
-    .tech-inner { display: grid; gap: 32px; }
-    @media (min-width: 900px) { .tech-inner { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 64px; align-items: start; } }
-    .tech h2 { margin: 12px 0 16px; }
-    .tech .lead { font-size: 1.05rem; color: var(--text-2); max-width: 40ch; }
-    .chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
-    .chip { display: inline-block; max-width: 100%; padding: 9px 14px; font-size: .8125rem; font-weight: 500; letter-spacing: .04em; color: var(--navy); border: 1px solid var(--navy); background: linear-gradient(135deg, var(--navy) 0 8px, #fff 8px) border-box; font-variant-numeric: tabular-nums; }
-    .tech-meta { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line-navy); display: flex; flex-wrap: wrap; gap: 8px 24px; }
-
-    /* contacto: tarjeta partida navy / blanco */
-    .contact-card { display: grid; grid-template-columns: minmax(0, 1fr); background: var(--card); border-radius: var(--radius); overflow: hidden; box-shadow: 0 20px 60px rgba(15,38,64,.14); }
-    .contact-card > * { min-width: 0; }
-    @media (min-width: 900px) { .contact-card { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); } }
-    .contact-brand { position: relative; overflow: hidden; padding: 44px 28px; background: var(--hero-grad); color: #fff; }
-    .contact-brand > :not(.contact-rings) { position: relative; z-index: 1; }
-    .contact-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px; }
-    .contact-rings { position: absolute; right: -70px; bottom: -90px; width: 340px; height: 340px; pointer-events: none; }
-    .contact-rings use { fill: none; stroke: var(--accent-soft); stroke-opacity: .34; stroke-width: 1; }
-    .contact-brand h2 { margin: 12px 0 14px; max-width: 18ch; }
-    .contact-brand .lead { font-size: 1.05rem; color: rgba(255,255,255,.78); max-width: 40ch; }
-    .contact-brand .hero-line { margin-top: 28px; }
-    .contact-panel { padding: 36px 28px; display: flex; flex-direction: column; justify-content: center; }
-    .contact-panel .btn-row { flex-direction: column; align-items: stretch; }
-    .contact-panel .btn { justify-content: center; }
-    @media (max-width: 399px) {
-      .contact-brand { padding: 40px 24px; }
-      .contact-panel { padding: 32px 24px; }
-    }
-    @media (min-width: 900px) {
-      .contact-brand { padding: 56px 52px; }
-      .contact-panel { padding: 48px 44px; }
+    @media (max-width:899px) {
+      .step { padding-left:76px; }
+      .step-n { position:absolute; left:0; top:0; }
+      .step::before { top:56px; left:27px; width:2px; bottom:-38px; background:linear-gradient(180deg,#bfdbfe,#e0ecfd); }
+      .step:last-child::before { display:none; }
+      .step h3 { margin-top:4px; }
     }
 
-    /* pie */
-    .footer { background: var(--navy-2); color: var(--on-navy); padding: 36px 0; font-size: .875rem; }
-    .footer .container { display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center; justify-content: space-between; }
-    .footer nav { display: flex; flex-wrap: wrap; gap: 4px 20px; }
-    .footer a { color: rgba(255,255,255,.84); text-decoration: none; }
-    .footer a:hover { color: #fff; text-decoration: underline; }
-    .footer .brand { font-size: 15px; }
-    .footer .brand svg { width: 24px; height: 24px; }
+    /* ============ tecnología ============ */
+    .tech-grid { display:grid; gap:clamp(30px,4.5vw,60px); align-items:center; grid-template-columns:1fr; }
+    @media (min-width:900px) { .tech-grid { grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); } }
+    .chips { display:flex; flex-wrap:wrap; gap:12px; }
+    .chip { display:inline-flex; align-items:center; gap:9px; padding:12px 18px; background:#fff; border:1px solid var(--line-2); border-radius:12px; font-size:.9375rem; font-weight:600; color:var(--ink); box-shadow:var(--sh-sm); }
+    .chip::before { content:""; flex:none; width:8px; height:8px; border-radius:50%; background:linear-gradient(135deg,var(--blue),var(--cyan)); }
 
-    /* ---------- movimiento reducido ---------- */
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { transition: none !important; animation: none !important; }
+    /* ============ CTA + pie ============ */
+    .cta { position:relative; overflow:hidden; isolation:isolate; background:linear-gradient(120deg,var(--navy-2) 0%,var(--navy) 55%,var(--navy-3) 100%); color:#fff; padding:clamp(70px,8.5vw,106px) 0; }
+    .cta::before, .cta::after { content:""; position:absolute; z-index:-1; border-radius:50%; }
+    .cta::before { top:-150px; right:-110px; width:430px; height:430px; background:radial-gradient(circle,rgba(37,99,235,.42) 0%,transparent 68%); }
+    .cta::after { bottom:-170px; left:-90px; width:390px; height:390px; background:radial-gradient(circle,rgba(6,182,212,.2) 0%,transparent 70%); }
+    .cta h2 { color:#fff; }
+    .cta .lead { color:rgba(255,255,255,.8); }
+    .cta .btn-row { justify-content:center; margin-top:32px; }
+    .cta .note { margin-top:20px; }
+    @media (max-width:519px) { .cta .btn-row .btn { width:100%; } }
+
+    .foot { background:var(--navy-2); color:rgba(255,255,255,.72); padding:clamp(52px,6vw,74px) 0 32px; font-size:.9375rem; }
+    .foot-grid { display:grid; gap:38px; grid-template-columns:1fr; }
+    @media (min-width:760px) { .foot-grid { grid-template-columns:1.5fr 1fr 1.2fr; gap:48px; } }
+    .foot h3 { color:#fff; font-size:.9375rem; font-weight:700; letter-spacing:.01em; margin-bottom:18px; }
+    .foot ul { display:grid; gap:12px; }
+    .foot a:not(.brand) { color:rgba(255,255,255,.72); text-decoration:none; }
+    .foot a:not(.brand):hover { color:#fff; text-decoration:underline; }
+    .foot .brand { margin-bottom:16px; }
+    .foot-about { max-width:34ch; color:rgba(255,255,255,.62); }
+    .foot-bottom { margin-top:44px; padding-top:26px; border-top:1px solid rgba(255,255,255,.12); text-align:center; color:rgba(255,255,255,.58); font-size:.875rem; }
+
+    @media (prefers-reduced-motion:reduce) {
+      html { scroll-behavior:auto; }
+      *, *::before, *::after { animation:none !important; transition:none !important; }
     }
-
-    /* ---------- impresion: conserva las superficies oscuras y quita lo decorativo ---------- */
     @media print {
-      .nav, .skip, .hero-grid, .hero-rings, .contact-rings, .scale, .band::before, .tech::before { display: none !important; }
-      .hero { padding-top: 32px; }
-      .hero, .band, .contact-brand, .footer, .btn-primary { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .col, .front, .step, .product, .contact-card { break-inside: avoid; }
+      .nav, .skip, .blob, .badge-wrap { display:none !important; }
+      .hero { padding-top:30px; }
+      .hero, .cta, .foot, .panel-top, .btn-primary, .btn-white, .ico, .step-n, .tick { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+      .card, .panel { box-shadow:none; border:1px solid var(--line); }
+      .sec { padding:34px 0; }
     }
   </style>
 </head>
 <body>
   <a class="skip" href="#inicio">Saltar al contenido</a>
 
-  <!-- símbolos compartidos: marca, iconos de contacto y curva de nivel -->
-  <svg class="sprite" aria-hidden="true" focusable="false">
-    <defs>
-      <symbol id="i-brand" viewBox="0 0 32 32"><rect x="1" y="1" width="30" height="30" rx="7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 21.5h11.5a3.5 3.5 0 0 0 .5-6.96A6 6 0 0 0 10.6 12.8 4.4 4.4 0 0 0 10 21.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
-      <symbol id="i-wa" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.9-5.4A8 8 0 1 1 21 12z"/></symbol>
-      <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
-      <path id="ring" vector-effect="non-scaling-stroke" d="M-100 0C-100-48-62-84-10-86 42-88 100-58 104-6 108 44 66 86 10 88-46 90-100 50-100 0Z"/>
-    </defs>
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6.5 18.5h11a4 4 0 0 0 .6-7.95A6.5 6.5 0 0 0 7.1 8.9 4.9 4.9 0 0 0 6.5 18.5z"/>
+    </symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.45L3 20.5l1.6-5.3A8.5 8.5 0 1 1 21 11.5z"/>
+      <path d="M8.6 9.1c.2-.5.4-.5.7-.5h.6c.2 0 .4 0 .6.5l.7 1.6c.1.3 0 .5-.1.7l-.4.5c-.1.2-.2.3 0 .6a7 7 0 0 0 2.8 2.3c.3.1.4 0 .6-.1l.5-.6c.2-.2.4-.2.6-.1l1.6.8c.3.2.4.3.4.5 0 .5-.3 1.3-.9 1.6-.5.3-1.2.4-2 .2a9.7 9.7 0 0 1-5.8-5.6c-.3-.9-.2-1.7.1-2.4z"/>
+    </symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2.75" y="4.75" width="18.5" height="14.5" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m5 12.5 4.5 4.5L19 7.5"/>
+    </symbol>
+    <symbol id="i-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m8.5 8-4.5 4 4.5 4"/><path d="m15.5 8 4.5 4-4.5 4"/><path d="m13.2 4.5-2.4 15"/>
+    </symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M7 18.5h10a3.8 3.8 0 0 0 .6-7.55A6.2 6.2 0 0 0 7.6 9.1 4.7 4.7 0 0 0 7 18.5z"/><path d="M12 16v-5.6"/><path d="m9.9 12.5 2.1-2.1 2.1 2.1"/>
+    </symbol>
+    <symbol id="i-life" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.4"/>
+      <path d="m6 6 3.6 3.6M18 6l-3.6 3.6M18 18l-3.6-3.6M6 18l3.6-3.6"/>
+    </symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.6"/>
+      <rect x="3.5" y="13.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/>
+    </symbol>
+    <symbol id="i-portal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13.5 3.5h5a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2h-5"/><path d="M10 12H3.5"/><path d="m7 8.5-3.5 3.5L7 15.5"/>
+    </symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3.2 5 6v5.5c0 4.2 2.9 7.6 7 9.3 4.1-1.7 7-5.1 7-9.3V6z"/><path d="m9 12 2.2 2.2L15.4 10"/>
+    </symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13.2 2.8 5 13.5h6l-.6 7.7L19 10.5h-6.4z"/>
+    </symbol>
+    <symbol id="i-wifi-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2.6 8.6A15 15 0 0 1 8 5.5"/><path d="M21.4 8.6A15 15 0 0 0 12 5"/><path d="M5.9 12.3A10 10 0 0 1 9.6 10.1"/><path d="M18.1 12.3A10 10 0 0 0 14.4 10.1"/><path d="M9.3 15.9a5 5 0 0 1 5.4 0"/><path d="M12 19.3h.01"/><path d="m3 3 18 18"/>
+    </symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="8.6"/><path d="M12 7.3V12l3.2 2"/>
+    </symbol>
   </svg>
 
-  <header class="nav on-dark">
+  <header class="nav">
     <div class="container">
       <a class="brand" href="#inicio" aria-label="Nuvol Solutions, ir al inicio">
-        <svg aria-hidden="true"><use href="#i-brand"/></svg>
+        <span class="brand-mark"><svg aria-hidden="true"><use href="#i-brand"/></svg></span>
         <span>Nuvol Solutions</span>
       </a>
-      <nav aria-label="Principal">
-        <ul class="nav-links" role="list">
-          <li class="more"><a href="#servicios">Servicios</a></li>
-          <li><a href="#producto">Producto</a></li>
-          <li class="more"><a href="#proceso">Proceso</a></li>
-          <li><a href="#contacto">Contacto</a></li>
-        </ul>
+      <nav class="nav-links" aria-label="Principal">
+        <a href="#servicios">Servicios</a>
+        <a href="#producto">Producto</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#contacto">Contacto</a>
       </nav>
+      <a class="btn btn-primary btn-sm" href="https://wa.me/51938319553?text=Hola%20Nuvol%2C%20quiero%20conversar%20sobre%20un%20proyecto" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp: abre una conversación con Nuvol Solutions">
+        <svg aria-hidden="true"><use href="#i-wa"/></svg>Escríbenos por WhatsApp
+      </a>
     </div>
   </header>
 
   <main>
-    <!-- 01 · HERO -->
-    <section id="inicio" class="hero on-dark">
-      <svg class="hero-grid" aria-hidden="true">
-        <defs>
-          <pattern id="grid-fine" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".08" stroke-width="1" shape-rendering="crispEdges"/></pattern>
-          <pattern id="grid-major" width="200" height="200" patternUnits="userSpaceOnUse"><path d="M200 0H0V200" fill="none" stroke="#fff" stroke-opacity=".08" stroke-width="1" shape-rendering="crispEdges"/></pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#grid-fine)"/>
-        <rect width="100%" height="100%" fill="url(#grid-major)"/>
-      </svg>
-      <svg class="hero-rings" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <g transform="translate(840 330)">
-          <use href="#ring" transform="rotate(-10) scale(.55)"/>
-          <use href="#ring" transform="rotate(-5) scale(.95)"/>
-          <use href="#ring" transform="scale(1.4)"/>
-          <use href="#ring" transform="rotate(4) scale(1.85)"/>
-          <use href="#ring" transform="rotate(8) scale(2.3)"/>
-          <use href="#ring" transform="rotate(13) scale(2.8)"/>
-          <use href="#ring" transform="rotate(18) scale(3.35)"/>
-        </g>
-        <g class="mark"><circle cx="840" cy="330" r="5"/><path d="M840 316v28M826 330h28"/></g>
-      </svg>
-
-      <div class="container hero-inner">
+    <!-- ============ hero ============ -->
+    <section id="inicio" class="hero">
+      <span class="blob blob-1" aria-hidden="true"></span>
+      <span class="blob blob-2" aria-hidden="true"></span>
+      <span class="blob blob-3" aria-hidden="true"></span>
+      <div class="container hero-grid">
         <div class="hero-copy">
-          <p class="cota">Nuvol Solutions · Software a medida</p>
-          <h1>Software de gestión para empresas que operan en campo</h1>
-          <p class="lead">Diseñamos, construimos y mantenemos en producción el ERP, el portal de proveedores y el sistema de seguridad industrial que tu operación necesita, incluso donde no hay señal.</p>
-          <div class="btn-row">
-            <a class="btn btn-light" href="https://wa.me/51938319553?text=Hola%20Nuvol%2C%20quiero%20conversar%20sobre%20un%20proyecto" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp: abre una conversación con Nuvol Solutions">
-              <svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-wa"/></svg>
-              Escríbenos por WhatsApp
+          <p class="eyebrow rise rise-1">Nuvol Solutions · Software a medida</p>
+          <h1 class="rise rise-2">Software de gestión para empresas que operan en campo</h1>
+          <p class="lead rise rise-3">Diseñamos, construimos y mantenemos en producción el ERP, el portal de proveedores y el sistema de seguridad industrial que tu operación necesita, incluso donde no hay señal.</p>
+          <div class="btn-row rise rise-3">
+            <a class="btn btn-primary" href="https://wa.me/51938319553?text=Hola%20Nuvol%2C%20quiero%20conversar%20sobre%20un%20proyecto" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp: abre una conversación con Nuvol Solutions">
+              <svg aria-hidden="true"><use href="#i-wa"/></svg>Escríbenos por WhatsApp
             </a>
             <a class="btn btn-ghost" href="mailto:jordinola@nuvolsolution.com?subject=Consulta%20desde%20la%20web" aria-label="Enviar un correo a Nuvol Solutions">
-              <svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-mail"/></svg>
-              Enviar un correo
+              <svg aria-hidden="true"><use href="#i-mail"/></svg>Enviar un correo
             </a>
           </div>
-          <p class="note">+51 938 319 553 · jordinola@nuvolsolution.com</p>
-          <p class="trust"><span class="dot" aria-hidden="true"></span><span>KNET, nuestro producto, está en producción con desarrollo continuo desde 2019.</span></p>
-          <div class="scale" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+          <p class="note mt-14">+51 938 319 553 · jordinola@nuvolsolution.com</p>
+          <p class="trust">
+            <span class="dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
+            <span>KNET, nuestro producto, está en producción con desarrollo continuo desde 2019.</span>
+          </p>
         </div>
 
-        <aside class="sheet" aria-labelledby="sheet-title">
-          <div class="sheet-head">
-            <p class="cota" id="sheet-title">Ficha del producto</p>
-            <span class="num" aria-hidden="true">HOJA 01 / 06</span>
+        <div class="showcase rise rise-3">
+          <div class="badge-wrap">
+            <div class="badge badge-1">
+              <i aria-hidden="true"><svg><use href="#i-wifi-off"/></svg></i>
+              <span><b>Trabaja sin señal</b><em>Sincroniza al volver</em></span>
+            </div>
+            <div class="badge badge-2">
+              <i aria-hidden="true"><svg><use href="#i-clock"/></svg></i>
+              <span><b>Desde 2019</b><em>En producción</em></span>
+            </div>
+            <div class="badge badge-3">
+              <i aria-hidden="true"><svg><use href="#i-bolt"/></svg></i>
+              <span><b>Hecho a medida</b><em>Sobre tu proceso</em></span>
+            </div>
           </div>
-          <dl>
-            <dt>Producto</dt><dd>KNET</dd>
-            <dt>Frentes</dt><dd>ERP · Portal de proveedores · SIG / HSEQ</dd>
-            <dt>Campo</dt><dd>PWA offline · firmas en tablet · sincronización automática</dd>
-            <dt>Base</dt><dd>.NET · SQL Server</dd>
-            <dt>Despliegue</dt><dd>Azure App Service · Azure SQL</dd>
-          </dl>
-          <div class="sheet-foot">
-            <div class="hero-line" aria-hidden="true"></div>
-            <span class="num" aria-hidden="true">NUVOL SOLUTIONS</span>
-          </div>
-        </aside>
+          <article class="panel" aria-label="Ficha del producto">
+            <div class="panel-top" aria-hidden="true"></div>
+            <dl class="spec">
+              <div><dt>Producto</dt><dd>KNET</dd></div>
+              <div><dt>Frentes</dt><dd>ERP · Portal de proveedores · SIG / HSEQ</dd></div>
+              <div><dt>Campo</dt><dd>PWA offline · firmas en tablet · sincronización automática</dd></div>
+              <div><dt>Base</dt><dd>.NET · SQL Server</dd></div>
+              <div><dt>Despliegue</dt><dd>Azure App Service · Azure SQL</dd></div>
+            </dl>
+          </article>
+        </div>
       </div>
     </section>
 
-    <!-- 02 · SERVICIOS -->
-    <section id="servicios" class="section sec-white">
+    <!-- ============ servicios ============ -->
+    <section id="servicios" class="sec">
       <div class="container">
-        <div class="sec-head">
-          <div>
-            <p class="cota">02 · Servicios</p>
-            <h2>Qué hacemos</h2>
-          </div>
-          <span class="num" aria-hidden="true">HOJA 02 / 06</span>
+        <div class="sec-head center">
+          <p class="eyebrow">Servicios</p>
+          <h2>Qué hacemos</h2>
         </div>
-        <div class="cols">
-          <article class="col">
-            <span class="num" aria-hidden="true">01</span>
-            <div class="plate cut" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>
-            </div>
+        <div class="grid-3">
+          <article class="card">
+            <div class="ico ico-amber" aria-hidden="true"><svg><use href="#i-code"/></svg></div>
             <h3>Desarrollo a medida</h3>
             <p>Módulos nuevos sobre el proceso real de tu empresa: cada cambio parte de una especificación escrita y acordada antes de tocar código.</p>
           </article>
-          <article class="col">
-            <span class="num" aria-hidden="true">02</span>
-            <div class="plate cut" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 16l-4-4-4 4"/><path d="M12 12v9"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
-            </div>
+          <article class="card">
+            <div class="ico ico-violet" aria-hidden="true"><svg><use href="#i-cloud"/></svg></div>
             <h3>Integración y despliegue</h3>
             <p>Azure App Service y Azure SQL, correo transaccional, importación y exportación en Excel, reportes en PDF y PWA para tablets.</p>
           </article>
-          <article class="col">
-            <span class="num" aria-hidden="true">03</span>
-            <div class="plate cut" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="M5.6 5.6l3.9 3.9M14.5 14.5l3.9 3.9M14.5 9.5l3.9-3.9M5.6 18.4l3.9-3.9"/></svg>
-            </div>
+          <article class="card">
+            <div class="ico ico-cyan" aria-hidden="true"><svg><use href="#i-life"/></svg></div>
             <h3>Soporte en producción</h3>
             <p>Evolución continua, corrección de incidencias y acompañamiento a los usuarios cuando el sistema ya está operando.</p>
           </article>
@@ -383,98 +384,80 @@
       </div>
     </section>
 
-    <!-- 03 · PRODUCTO -->
-    <section id="producto" class="section">
+    <!-- ============ producto ============ -->
+    <section id="producto" class="sec sec-sky">
       <div class="container">
-        <div class="sec-head">
-          <div>
-            <p class="cota">03 · Producto</p>
-            <h2>KNET: un sistema, tres frentes</h2>
-          </div>
-          <span class="num" aria-hidden="true">HOJA 03 / 06</span>
+        <div class="sec-head center">
+          <p class="eyebrow">Producto</p>
+          <h2>KNET: un sistema, tres frentes</h2>
         </div>
-        <div class="product">
-          <article class="front">
-            <span class="num" aria-hidden="true">01</span>
-            <div class="hero-line" aria-hidden="true"></div>
-            <div class="plate cut" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/></svg>
-            </div>
+        <div class="grid-3">
+          <article class="card front">
+            <div class="ico ico-blue" aria-hidden="true"><svg><use href="#i-grid"/></svg></div>
+            <span class="tag tag-blue">Gestión interna</span>
             <h3>ERP</h3>
-            <p class="cota">Gestión interna</p>
-            <ul class="spec" role="list">
-              <li>Compras y servicios: requerimiento → pedido → cotización o licitación → orden</li>
-              <li>Aprobaciones por niveles de monto, con titular y sustituto</li>
-              <li>Almacén con kardex, transferencias y ajustes</li>
-              <li>Activos fijos con depreciación, proyectos y bajas</li>
-              <li>Tesorería: cuenta corriente, detracciones y pagos con voucher</li>
-              <li>27 reportes en PDF</li>
+            <ul class="checks" role="list">
+              <li><span class="tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span>Compras y servicios: requerimiento → pedido → cotización o licitación → orden</span></li>
+              <li><span class="tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span>Aprobaciones por niveles de monto, con titular y sustituto</span></li>
+              <li><span class="tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span>Almacén con kardex, transferencias y ajustes</span></li>
+              <li><span class="tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span>Activos fijos con depreciación, proyectos y bajas</span></li>
+              <li><span class="tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span>Tesorería: cuenta corriente, detracciones y pagos con voucher</span></li>
+              <li><span class="tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span>27 reportes en PDF</span></li>
             </ul>
           </article>
-          <article class="front">
-            <span class="num" aria-hidden="true">02</span>
-            <div class="hero-line" aria-hidden="true"></div>
-            <div class="plate cut" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4"/><path d="M14 8l4 4-4 4"/><path d="M18 12H9"/></svg>
-            </div>
+          <article class="card front">
+            <div class="ico ico-cyan" aria-hidden="true"><svg><use href="#i-portal"/></svg></div>
+            <span class="tag tag-cyan">Acceso externo</span>
             <h3>Portal de proveedores</h3>
-            <p class="cota">Acceso externo</p>
-            <ul class="spec" role="list">
-              <li>Acceso con RUC y token, sin instalar nada</li>
-              <li>Licitaciones en línea con preguntas públicas y consultas privadas</li>
-              <li>Facturación contra órdenes con XML UBL 2.1 validado: emisor, receptor, moneda y periodo</li>
-              <li>Seguimiento de cada factura hasta el voucher de pago</li>
-              <li>Cierre mensual de recepción configurable</li>
+            <ul class="checks" role="list">
+              <li><span class="tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span>Acceso con RUC y token, sin instalar nada</span></li>
+              <li><span class="tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span>Licitaciones en línea con preguntas públicas y consultas privadas</span></li>
+              <li><span class="tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span>Facturación contra órdenes con XML UBL 2.1 validado: emisor, receptor, moneda y periodo</span></li>
+              <li><span class="tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span>Seguimiento de cada factura hasta el voucher de pago</span></li>
+              <li><span class="tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span>Cierre mensual de recepción configurable</span></li>
             </ul>
           </article>
-          <article class="front">
-            <span class="num" aria-hidden="true">03</span>
-            <div class="hero-line" aria-hidden="true"></div>
-            <div class="plate cut" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
-            </div>
+          <article class="card front">
+            <div class="ico ico-green" aria-hidden="true"><svg><use href="#i-shield"/></svg></div>
+            <span class="tag tag-green">Campo · offline</span>
             <h3>SIG / HSEQ</h3>
-            <p class="cota">Campo · offline</p>
-            <ul class="spec" role="list">
-              <li>Análisis de riesgo de tarea y permiso de trabajo digitales</li>
-              <li>Siete permisos complementarios: caliente, altura, espacio confinado, izaje, excavación, eléctrico y bloqueo</li>
-              <li>Firmas en tablet, con o sin conexión</li>
-              <li>PWA offline con sincronización automática al recuperar señal</li>
-              <li>Exportación al formato oficial en Excel</li>
+            <ul class="checks" role="list">
+              <li><span class="tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span>Análisis de riesgo de tarea y permiso de trabajo digitales</span></li>
+              <li><span class="tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span>Siete permisos complementarios: caliente, altura, espacio confinado, izaje, excavación, eléctrico y bloqueo</span></li>
+              <li><span class="tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span>Firmas en tablet, con o sin conexión</span></li>
+              <li><span class="tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span>PWA offline con sincronización automática al recuperar señal</span></li>
+              <li><span class="tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span>Exportación al formato oficial en Excel</span></li>
             </ul>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- 04 · PROCESO -->
-    <section id="proceso" class="section band on-dark">
+    <!-- ============ proceso ============ -->
+    <section id="proceso" class="sec sec-wash">
       <div class="container">
-        <div class="sec-head">
-          <div>
-            <p class="cota">04 · Proceso</p>
-            <h2>Cómo trabajamos</h2>
-          </div>
-          <span class="num" aria-hidden="true">HOJA 04 / 06</span>
+        <div class="sec-head center">
+          <p class="eyebrow">Proceso</p>
+          <h2>Cómo trabajamos</h2>
         </div>
-        <ol class="timeline" role="list">
+        <ol class="steps" role="list">
           <li class="step">
-            <span class="big" aria-hidden="true">01</span>
+            <span class="step-n" aria-hidden="true">01</span>
             <h3>Entender el proceso</h3>
             <p>Recorremos el flujo real con quienes lo operan, no con el organigrama.</p>
           </li>
           <li class="step">
-            <span class="big" aria-hidden="true">02</span>
+            <span class="step-n" aria-hidden="true">02</span>
             <h3>Especificar y acordar</h3>
             <p>Cada cambio tiene un documento de diseño aprobado antes de construir.</p>
           </li>
           <li class="step">
-            <span class="big" aria-hidden="true">03</span>
+            <span class="step-n" aria-hidden="true">03</span>
             <h3>Construir con pruebas</h3>
             <p>Pruebas unitarias, y de extremo a extremo sobre una copia de la base real.</p>
           </li>
           <li class="step">
-            <span class="big" aria-hidden="true">04</span>
+            <span class="step-n" aria-hidden="true">04</span>
             <h3>Desplegar y verificar</h3>
             <p>Publicación controlada y verificación en producción, con vuelta atrás preparada.</p>
           </li>
@@ -482,84 +465,73 @@
       </div>
     </section>
 
-    <!-- 05 · TECNOLOGÍA -->
-    <section id="tecnologia" class="section tech">
-      <div class="container">
-        <div class="tech-inner">
-          <div>
-            <p class="cota">05 · Tecnología</p>
-            <h2>Tecnología</h2>
-            <p class="lead">Un ERP en producción con desarrollo continuo desde 2019, para una empresa de servicios petroleros en Perú.</p>
-          </div>
-          <div>
-            <ul class="chips" role="list" aria-label="Tecnologías">
-              <li class="chip cut">.NET</li>
-              <li class="chip cut">SQL Server</li>
-              <li class="chip cut">Azure App Service</li>
-              <li class="chip cut">Azure SQL</li>
-              <li class="chip cut">PWA (IndexedDB + Service Worker)</li>
-              <li class="chip cut">Reportes RDLC → PDF</li>
-              <li class="chip cut">xUnit</li>
-              <li class="chip cut">Playwright</li>
-            </ul>
-            <div class="tech-meta">
-              <span class="num" aria-hidden="true">HOJA 05 / 06</span>
-              <span class="num" aria-hidden="true">ESPECIFICACIÓN TÉCNICA</span>
-            </div>
-          </div>
+    <!-- ============ tecnología ============ -->
+    <section id="tecnologia" class="sec">
+      <div class="container tech-grid">
+        <div>
+          <h2>Tecnología</h2>
+          <p class="lead mt-18">Un ERP en producción con desarrollo continuo desde 2019, para una empresa de servicios petroleros en Perú.</p>
         </div>
+        <ul class="chips" role="list">
+          <li class="chip">.NET</li>
+          <li class="chip">SQL Server</li>
+          <li class="chip">Azure App Service</li>
+          <li class="chip">Azure SQL</li>
+          <li class="chip">PWA (IndexedDB + Service Worker)</li>
+          <li class="chip">Reportes RDLC → PDF</li>
+          <li class="chip">xUnit</li>
+          <li class="chip">Playwright</li>
+        </ul>
       </div>
     </section>
 
-    <!-- 06 · CONTACTO -->
-    <section id="contacto" class="section">
-      <div class="container">
-        <div class="contact-card">
-          <div class="contact-brand on-dark">
-            <svg class="contact-rings" viewBox="-200 -200 400 400" aria-hidden="true">
-              <use href="#ring" transform="rotate(-6) scale(.6)"/>
-              <use href="#ring" transform="scale(1)"/>
-              <use href="#ring" transform="rotate(6) scale(1.4)"/>
-              <use href="#ring" transform="rotate(12) scale(1.8)"/>
-            </svg>
-            <div class="contact-top">
-              <p class="cota">06 · Contacto</p>
-              <span class="num" aria-hidden="true">HOJA 06 / 06</span>
-            </div>
-            <h2>Cuéntanos qué necesita tu operación</h2>
-            <p class="lead">Respondemos por WhatsApp o correo. Sin formularios.</p>
-            <div class="hero-line" aria-hidden="true"></div>
-          </div>
-          <div class="contact-panel">
-            <div class="btn-row">
-              <a class="btn btn-primary" href="https://wa.me/51938319553?text=Hola%20Nuvol%2C%20quiero%20conversar%20sobre%20un%20proyecto" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp: abre una conversación con Nuvol Solutions">
-                <svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-wa"/></svg>
-                Escríbenos por WhatsApp
-              </a>
-              <a class="btn btn-outline" href="mailto:jordinola@nuvolsolution.com?subject=Consulta%20desde%20la%20web" aria-label="Enviar un correo a Nuvol Solutions">
-                <svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-mail"/></svg>
-                Enviar un correo
-              </a>
-            </div>
-            <p class="note">+51 938 319 553 · jordinola@nuvolsolution.com</p>
-          </div>
+    <!-- ============ contacto ============ -->
+    <section id="contacto" class="cta on-dark">
+      <div class="container center">
+        <p class="eyebrow" style="color:#7dd3fc">Contacto</p>
+        <h2 class="mt-14">Cuéntanos qué necesita tu operación</h2>
+        <p class="lead mt-18">Respondemos por WhatsApp o correo. Sin formularios.</p>
+        <div class="btn-row">
+          <a class="btn btn-white" href="https://wa.me/51938319553?text=Hola%20Nuvol%2C%20quiero%20conversar%20sobre%20un%20proyecto" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp: abre una conversación con Nuvol Solutions">
+            <svg aria-hidden="true"><use href="#i-wa"/></svg>Escríbenos por WhatsApp
+          </a>
+          <a class="btn btn-outline-white" href="mailto:jordinola@nuvolsolution.com?subject=Consulta%20desde%20la%20web" aria-label="Enviar un correo a Nuvol Solutions">
+            <svg aria-hidden="true"><use href="#i-mail"/></svg>Enviar un correo
+          </a>
         </div>
+        <p class="note">+51 938 319 553 · jordinola@nuvolsolution.com</p>
       </div>
     </section>
   </main>
 
-  <footer class="footer on-dark">
+  <footer class="foot on-dark">
     <div class="container">
-      <a class="brand" href="#inicio" aria-label="Nuvol Solutions, ir al inicio">
-        <svg aria-hidden="true"><use href="#i-brand"/></svg>
-        <span>Nuvol Solutions</span>
-      </a>
-      <nav aria-label="Pie de página">
-        <a href="#servicios">Servicios</a>
-        <a href="#producto">Producto</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
-      <p>© 2026 Nuvol Solutions</p>
+      <div class="foot-grid">
+        <div>
+          <a class="brand" href="#inicio" aria-label="Nuvol Solutions, ir al inicio">
+            <span class="brand-mark"><svg aria-hidden="true"><use href="#i-brand"/></svg></span>
+            <span>Nuvol Solutions</span>
+          </a>
+          <p class="foot-about">Software de gestión para empresas que operan en campo.</p>
+        </div>
+        <div>
+          <h3>Secciones</h3>
+          <ul role="list">
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#producto">Producto</a></li>
+            <li><a href="#proceso">Proceso</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contacto</h3>
+          <ul role="list">
+            <li>WhatsApp: +51 938 319 553</li>
+            <li>jordinola@nuvolsolution.com</li>
+          </ul>
+        </div>
+      </div>
+      <p class="foot-bottom">© 2026 Nuvol Solutions</p>
     </div>
   </footer>
 </body>

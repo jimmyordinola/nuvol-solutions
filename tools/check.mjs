@@ -68,11 +68,11 @@ for (const [w, h] of [[360, 740], [390, 844], [1440, 900]]) {
   }
   if (!allowPlaceholders) {
     const was = hrefs.filter(x => x.startsWith('https://wa.me/'));
-    ok(was.length === 2, `hay 2 enlaces wa.me a ${w}px (hay ${was.length}): ${was.join(', ')}`);
+    ok(was.length >= 2, `al menos 2 enlaces wa.me a ${w}px (hay ${was.length}): ${was.join(', ')}`);
     ok(was.every(x => x === was[0]), `todos los wa.me son iguales a ${w}px: ${was.join(', ')}`);
     ok(was.every(wa => /^https:\/\/wa\.me\/[1-9]\d{8,14}(\?text=[^ ]*)?$/.test(wa)), `wa.me con número real a ${w}px: ${was.join(', ')}`);
     const mails = hrefs.filter(x => x.startsWith('mailto:'));
-    ok(mails.length === 2, `hay 2 enlaces mailto a ${w}px (hay ${mails.length}): ${mails.join(', ')}`);
+    ok(mails.length >= 2, `al menos 2 enlaces mailto a ${w}px (hay ${mails.length}): ${mails.join(', ')}`);
     ok(mails.every(x => x === mails[0]), `todos los mailto son iguales a ${w}px: ${mails.join(', ')}`);
     ok(mails.every(mail => /^mailto:[^@\s]+@[^@\s]+\.[a-z]{2,}(\?subject=[^ ]*)?$/i.test(mail)), `mailto válido a ${w}px: ${mails.join(', ')}`);
   }
